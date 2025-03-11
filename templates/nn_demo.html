@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-white shadow rounded-lg p-8">
+    <!-- Header -->
+    <div class="max-w-3xl mx-auto text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">
+            Fashion Item Classification Demo
+        </h1>
+        <p class="text-xl text-gray-600">
+            Upload an image to classify the fashion item
+        </p>
+    </div>
+
+    <!-- Upload Section -->
+    <div class="max-w-2xl mx-auto">
+        <div class="bg-gray-50 rounded-lg p-6 mb-8">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Upload Image</h2>
+            
+            <!-- Upload Form -->
+            <form id="uploadForm" class="space-y-6">
+                <!-- Image Upload -->
+                <div class="flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                    <div class="space-y-1 text-center">
+                        <div class="flex flex-col items-center">
+                            <!-- Preview Image -->
+                            <img id="imagePreview" class="hidden mb-4 max-h-64 object-contain" alt="Preview">
+                            
+                            <!-- Upload Icon -->
+                            <svg id="uploadIcon" class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            
+                            <!-- Upload Text -->
+                            <div class="flex text-sm text-gray-600">
+                                <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-purple-600 hover:text-purple-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-purple-500">
+                                    <span>Upload a file</span>
+                                    <input id="file-upload" name="file-upload" type="file" class="sr-only" accept="image/*">
+                                </label>
+                                <p class="pl-1">or drag and drop</p>
+                            </div>
+                            <p class="text-xs text-gray-500">PNG, JPG, GIF up to 5MB</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center">
+                    <button type="submit" id="predictButton" disabled
+                        class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-50 disabled:cursor-not-allowed">
+                        Classify Image
+                        <i class="fas fa-tshirt ml-2"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Results Section (Hidden by default) -->
+        <div id="results" class="hidden">
+            <div class="bg-gray-50 rounded-lg p-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">Classification Results</h2>
+                <div id="predictionResult" class="space-y-4">
+                    <!-- Results will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Class Information -->
+        <div class="mt-8 bg-gray-50 rounded-lg p-6">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Fashion Categories</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-tshirt text-purple-600"></i>
+                    <span>T-shirt/Top</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-socks text-purple-600"></i>
+                    <span>Trouser</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-hat-cowboy text-purple-600"></i>
+                    <span>Pullover</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-female text-purple-600"></i>
+                    <span>Dress</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-jacket text-purple-600"></i>
+                    <span>Coat</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-shoe-prints text-purple-600"></i>
+                    <span>Sandal</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for form handling -->
+<script>
+// Handle file selection
+document.getElementById('file-upload').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+        // Enable predict button
+        document.getElementById('predictButton').disabled = false;
+        
+        // Show image preview
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const preview = document.getElementById('imagePreview');
+            preview.src = e.target.result;
+            preview.classList.remove('hidden');
+            document.getElementById('uploadIcon').classList.add('hidden');
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+// Handle form submission
+document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData();
+    const fileField = document.querySelector('input[type="file"]');
+    formData.append('image', fileField.files[0]);
+    
+    try {
+        // Show loading state
+        const predictButton = document.getElementById('predictButton');
+        const originalText = predictButton.innerHTML;
+        predictButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Processing...';
+        predictButton.disabled = true;
+        
+        // Send prediction request
+        const response = await fetch('/predict_fashion', {
+            method: 'POST',
+            body: formData
+        });
+        
+        const result = await response.json();
+        
+        // Show results section
+        const resultsDiv = document.getElementById('results');
+        const predictionResult = document.getElementById('predictionResult');
+        resultsDiv.classList.remove('hidden');
+        
+        // Display prediction
+        predictionResult.innerHTML = `
+            <div class="text-center">
+                <div class="text-2xl font-bold text-purple-600 mb-2">
+                    ${result.class_name}
+                </div>
+                <div class="text-gray-600">
+                    Confidence: ${(result.confidence * 100).toFixed(2)}%
+                </div>
+            </div>
+            <div class="mt-4">
+                <h3 class="font-semibold mb-2">Top 3 Predictions:</h3>
+                <div class="space-y-2">
+                    ${result.top_3.map(pred => `
+                        <div class="flex justify-between items-center">
+                            <span>${pred.class_name}</span>
+                            <span class="text-gray-600">${(pred.confidence * 100).toFixed(2)}%</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+        
+        // Scroll to results
+        resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while getting the prediction. Please try again.');
+    } finally {
+        // Restore button state
+        predictButton.innerHTML = originalText;
+        predictButton.disabled = false;
+    }
+});
+
+// Handle drag and drop
+const dropZone = document.querySelector('form');
+
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+    dropZone.addEventListener(eventName, preventDefaults, false);
+});
+
+function preventDefaults (e) {
+    e.preventDefault();
+    e.stopPropagation();
+}
+
+['dragenter', 'dragover'].forEach(eventName => {
+    dropZone.addEventListener(eventName, highlight, false);
+});
+
+['dragleave', 'drop'].forEach(eventName => {
+    dropZone.addEventListener(eventName, unhighlight, false);
+});
+
+function highlight(e) {
+    dropZone.classList.add('border-purple-500');
+}
+
+function unhighlight(e) {
+    dropZone.classList.remove('border-purple-500');
+}
+
+dropZone.addEventListener('drop', handleDrop, false);
+
+function handleDrop(e) {
+    const dt = e.dataTransfer;
+    const file = dt.files[0];
+    
+    const fileInput = document.getElementById('file-upload');
+    fileInput.files = dt.files;
+    
+    // Trigger change event
+    fileInput.dispatchEvent(new Event('change'));
+}
+</script>
+{% endblock %}

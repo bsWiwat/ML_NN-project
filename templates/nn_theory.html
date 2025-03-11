@@ -1,0 +1,158 @@
+{% extends "base.html" %} {% block content %}
+<div class="bg-white shadow rounded-lg p-8">
+  <!-- Header -->
+  <div class="max-w-3xl mx-auto text-center mb-12">
+    <h1 class="text-4xl font-bold text-gray-900 mb-4">
+      Neural Network Model Development
+    </h1>
+    <p class="text-xl text-gray-600">
+      Understanding the Fashion MNIST Dataset and CNN Architecture
+    </p>
+  </div>
+
+  <!-- Dataset Section -->
+  <div class="mb-12">
+    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+      <i class="fas fa-database text-purple-600 mr-3"></i>
+      Dataset Overview
+    </h2>
+    <div class="bg-gray-50 rounded-lg p-6">
+      <div class="flex items-center">
+        <h3 class="text-xl font-semibold mr-4">Fashion MNIST Dataset</h3>
+        <span class="">Data from : </span>
+        <a
+          class="text-blue-500 underline"
+          href="https://www.tensorflow.org/datasets/catalog/fashion_mnist"
+          target="_blank"
+        >
+          https://www.tensorflow.org/datasets/catalog/fashion_mnist
+        </a>
+      </div>
+      <p class="text-gray-600 mb-4">
+        Fashion MNIST is a dataset of Zalando's article images, consisting of a
+        training set of 60,000 examples and a test set of 10,000 examples.
+      </p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div>
+          <h4 class="font-semibold mb-2">Dataset Characteristics</h4>
+          <ul class="list-disc list-inside text-gray-600">
+            <li>70,000 grayscale images</li>
+            <li>28x28 pixels each</li>
+            <li>10 fashion categories</li>
+            <li>Direct replacement for MNIST</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-2">Fashion Categories</h4>
+          <ul class="list-disc list-inside text-gray-600">
+            <li>T-shirt/Top</li>
+            <li>Trouser</li>
+            <li>Pullover</li>
+            <li>Dress</li>
+            <li>And more clothing items</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data Preparation Section -->
+  <div class="mb-12">
+    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+      <i class="fas fa-tools text-purple-600 mr-3"></i>
+      Data Preparation Process
+    </h2>
+    <div class="space-y-6">
+      <div class="bg-gray-50 rounded-lg p-6">
+        <h3 class="text-xl font-semibold mb-4">Image Preprocessing</h3>
+        <ul class="list-disc list-inside text-gray-600 space-y-2">
+          <li>Normalization (scaling pixel values to 0-1)</li>
+          <li>Reshaping images to match CNN input</li>
+          <li>Data augmentation techniques</li>
+          <li>Train-test split preparation</li>
+        </ul>
+      </div>
+      <div class="bg-gray-50 rounded-lg p-6">
+        <h3 class="text-xl font-semibold mb-4">Data Augmentation</h3>
+        <ul class="list-disc list-inside text-gray-600 space-y-2">
+          <li>Random rotations</li>
+          <li>Width and height shifts</li>
+          <li>Zoom range adjustments</li>
+          <li>Horizontal flips</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Neural Network Architecture -->
+  <div class="mb-12">
+    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+      <i class="fas fa-network-wired text-purple-600 mr-3"></i>
+      CNN Architecture
+    </h2>
+    <div class="space-y-6">
+      <div class="bg-gray-50 rounded-lg p-6">
+        <h3 class="text-xl font-semibold mb-4">Layer Configuration</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <h4 class="font-semibold mb-2">Convolutional Layers</h4>
+            <ul class="list-disc list-inside text-gray-600 space-y-2">
+              <li>Input shape: 28x28x1</li>
+              <li>First Conv2D: 32 filters</li>
+              <li>Second Conv2D: 64 filters</li>
+              <li>MaxPooling layers</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-2">Dense Layers</h4>
+            <ul class="list-disc list-inside text-gray-600 space-y-2">
+              <li>Flatten layer</li>
+              <li>Dense layer: 128 units</li>
+              <li>Dropout for regularization</li>
+              <li>Output: 10 units (Softmax)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="bg-gray-50 rounded-lg p-6">
+        <h3 class="text-xl font-semibold mb-4">Training Configuration</h3>
+        <ul class="list-disc list-inside text-gray-600 space-y-2">
+          <li>Optimizer: Adam</li>
+          <li>Loss: Categorical Crossentropy</li>
+          <li>Metrics: Accuracy</li>
+          <li>Early Stopping</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Model Performance -->
+  <div class="mb-12">
+    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+      <i class="fas fa-chart-line text-purple-600 mr-3"></i>
+      Model Performance
+    </h2>
+    <div class="bg-gray-50 rounded-lg p-6">
+      <h3 class="text-xl font-semibold mb-4">Evaluation Metrics</h3>
+      <ul class="list-disc list-inside text-gray-600 space-y-2">
+        <li>Training accuracy and loss curves</li>
+        <li>Validation performance</li>
+        <li>Confusion matrix analysis</li>
+        <li>Per-class accuracy metrics</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Try Demo Button -->
+  <div class="text-center">
+    <a
+      href="/nn_demo"
+      class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700"
+    >
+      Try the Model Demo
+      <i class="fas fa-arrow-right ml-2"></i>
+    </a>
+  </div>
+</div>
+{% endblock %}
+
