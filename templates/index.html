@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-white shadow rounded-lg">
+    <!-- Hero Section -->
+    <div class="px-8 py-12 max-w-7xl mx-auto text-center">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">
+            Machine Learning & Neural Network Showcase
+        </h1>
+        <p class="text-xl text-gray-600 mb-8">
+            Explore our implementation of Machine Learning and Neural Network models using real-world datasets
+        </p>
+    </div>
+
+    <!-- Project Overview Cards -->
+    <div class="px-8 py-12 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Machine Learning Section -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div class="p-8">
+                    <div class="flex items-center justify-center w-16 h-16 bg-indigo-100 rounded-full mb-4">
+                        <i class="fas fa-brain text-2xl text-indigo-600"></i>
+                    </div>
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Machine Learning Model</h2>
+                    <p class="text-gray-600 mb-6">
+                        Discover our implementation of multiple machine learning algorithms on a carefully prepared dataset.
+                    </p>
+                    <div class="space-y-4">
+                        <a href="/ml_theory" class="block text-center bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors duration-300">
+                            Learn About the Model
+                        </a>
+                        <a href="/ml_demo" class="block text-center border border-indigo-600 text-indigo-600 px-4 py-2 rounded-md hover:bg-indigo-50 transition-colors duration-300">
+                            Try the Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Neural Network Section -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div class="p-8">
+                    <div class="flex items-center justify-center w-16 h-16 bg-purple-100 rounded-full mb-4">
+                        <i class="fas fa-network-wired text-2xl text-purple-600"></i>
+                    </div>
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Neural Network Model</h2>
+                    <p class="text-gray-600 mb-6">
+                        Explore our custom-designed neural network architecture and its application on real-world data.
+                    </p>
+                    <div class="space-y-4">
+                        <a href="/nn_theory" class="block text-center bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition-colors duration-300">
+                            Learn About the Model
+                        </a>
+                        <a href="/nn_demo" class="block text-center border border-purple-600 text-purple-600 px-4 py-2 rounded-md hover:bg-purple-50 transition-colors duration-300">
+                            Try the Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="px-8 py-12 max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Project Features</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Data Preparation -->
+            <div class="text-center">
+                <div class="flex items-center justify-center w-12 h-12 mx-auto bg-green-100 rounded-full mb-4">
+                    <i class="fas fa-database text-green-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">Data Preparation</h3>
+                <p class="text-gray-600">
+                    Comprehensive data cleaning and preprocessing pipeline for both datasets
+                </p>
+            </div>
+
+            <!-- Model Development -->
+            <div class="text-center">
+                <div class="flex items-center justify-center w-12 h-12 mx-auto bg-blue-100 rounded-full mb-4">
+                    <i class="fas fa-cogs text-blue-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">Model Development</h3>
+                <p class="text-gray-600">
+                    Multiple algorithms and custom neural network architecture
+                </p>
+            </div>
+
+            <!-- Interactive Demo -->
+            <div class="text-center">
+                <div class="flex items-center justify-center w-12 h-12 mx-auto bg-red-100 rounded-full mb-4">
+                    <i class="fas fa-laptop-code text-red-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">Interactive Demo</h3>
+                <p class="text-gray-600">
+                    Try out both models with your own input data
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
