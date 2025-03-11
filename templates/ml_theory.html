@@ -1,0 +1,200 @@
+{% extends "base.html" %} {% block content %}
+<div class="bg-white shadow rounded-lg p-8">
+  <!-- Header -->
+  <div class="max-w-3xl mx-auto text-center mb-12">
+    <h1 class="text-4xl font-bold text-gray-900 mb-4">
+      Machine Learning Model Development
+    </h1>
+    <p class="text-xl text-gray-600">
+      Understanding the Heart Disease Dataset and Model Development Process
+    </p>
+  </div>
+
+  <!-- Dataset Section -->
+  <div class="mb-12">
+    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+      <i class="fas fa-database text-indigo-600 mr-3"></i>
+      Dataset Overview
+    </h2>
+    <div class="bg-gray-50 rounded-lg p-6">
+      <div class="flex items-center">
+        <h3 class="text-xl font-semibold mr-4">
+          Heart Disease UCI Dataset
+        </h3>
+        <span class="">Data from : </span>
+        <a
+          class="text-blue-500 underline"
+          href="https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset"
+          target="_blank"
+        >
+          https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset
+        </a>
+      </div>
+
+      <p class="text-gray-600 mb-6">
+        The Heart Disease UCI dataset is a comprehensive collection of medical
+        data used to predict the presence of heart disease in patients. It
+        combines data from several institutions and includes various clinical
+        and diagnostic measurements.
+      </p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div>
+          <h4 class="font-semibold mb-2">Dataset Characteristics</h4>
+          <ul class="list-disc list-inside text-gray-600 space-y-2">
+            <li>1025 patient records</li>
+            <li>14 clinical attributes</li>
+            <li>Binary classification target</li>
+            <li>Mixed numerical and categorical features</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-2">Key Features</h4>
+          <ul class="list-disc list-inside text-gray-600 space-y-2">
+            <li>Age and Gender</li>
+            <li>Chest Pain Type (4 categories)</li>
+            <li>Resting Blood Pressure</li>
+            <li>Serum Cholesterol Levels</li>
+            <li>Resting ECG Results</li>
+            <li>Maximum Heart Rate</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data Preparation Section -->
+  <div class="mb-12">
+    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+      <i class="fas fa-tools text-indigo-600 mr-3"></i>
+      Data Preparation Process
+    </h2>
+    <div class="space-y-6">
+      <div class="bg-gray-50 rounded-lg p-6">
+        <h3 class="text-xl font-semibold mb-4">
+          Data Cleaning & Preprocessing
+        </h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <h4 class="font-semibold mb-2">Missing Value Treatment</h4>
+            <ul class="list-disc list-inside text-gray-600 space-y-2">
+              <li>Statistical imputation for numerical features</li>
+              <li>Mode imputation for categorical variables</li>
+              <li>Validation of imputed values</li>
+              <li>Documentation of missing patterns</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-2">Feature Engineering</h4>
+            <ul class="list-disc list-inside text-gray-600 space-y-2">
+              <li>Standardization of numerical features</li>
+              <li>One-hot encoding of categorical variables</li>
+              <li>Feature interaction analysis</li>
+              <li>Correlation-based feature selection</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="bg-gray-50 rounded-lg p-6">
+        <h3 class="text-xl font-semibold mb-4">Data Validation</h3>
+        <ul class="list-disc list-inside text-gray-600 space-y-2">
+          <li>Cross-validation strategy implementation</li>
+          <li>Train-test split configuration</li>
+          <li>Data distribution analysis</li>
+          <li>Feature importance assessment</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Model Development Section -->
+  <div class="mb-12">
+    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+      <i class="fas fa-brain text-indigo-600 mr-3"></i>
+      Model Development
+    </h2>
+    <div class="space-y-6">
+      <div class="bg-gray-50 rounded-lg p-6">
+        <h3 class="text-xl font-semibold mb-4">
+          Algorithm Selection & Implementation
+        </h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <h4 class="font-semibold mb-2">Random Forest Classifier</h4>
+            <ul class="list-disc list-inside text-gray-600 space-y-2">
+              <li>Ensemble learning approach</li>
+              <li>Multiple decision trees</li>
+              <li>Bootstrap aggregation</li>
+              <li>Feature importance ranking</li>
+              <li>Reduced overfitting risk</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-2">XGBoost Classifier</h4>
+            <ul class="list-disc list-inside text-gray-600 space-y-2">
+              <li>Gradient boosting framework</li>
+              <li>Tree pruning optimization</li>
+              <li>Built-in regularization</li>
+              <li>Parallel processing</li>
+              <li>Handling of sparse data</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="bg-gray-50 rounded-lg p-6">
+        <h3 class="text-xl font-semibold mb-4">Hyperparameter Optimization</h3>
+        <ul class="list-disc list-inside text-gray-600 space-y-2">
+          <li>Grid search with cross-validation</li>
+          <li>Learning rate adjustment</li>
+          <li>Tree depth optimization</li>
+          <li>Minimum sample leaf tuning</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Model Evaluation Section -->
+  <div class="mb-12">
+    <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+      <i class="fas fa-chart-line text-indigo-600 mr-3"></i>
+      Model Evaluation
+    </h2>
+    <div class="space-y-6">
+      <div class="bg-gray-50 rounded-lg p-6">
+        <h3 class="text-xl font-semibold mb-4">Performance Metrics</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <h4 class="font-semibold mb-2">Classification Metrics</h4>
+            <ul class="list-disc list-inside text-gray-600 space-y-2">
+              <li>Accuracy and Precision</li>
+              <li>Recall and F1-Score</li>
+              <li>ROC Curve Analysis</li>
+              <li>Confusion Matrix</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-2">Model Insights</h4>
+            <ul class="list-disc list-inside text-gray-600 space-y-2">
+              <li>Feature importance visualization</li>
+              <li>Prediction confidence scores</li>
+              <li>Error analysis</li>
+              <li>Performance comparison</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Try Demo Button -->
+  <div class="text-center">
+    <a
+      href="/ml_demo"
+      class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+    >
+      Try the Model Demo
+      <i class="fas fa-arrow-right ml-2"></i>
+    </a>
+  </div>
+</div>
+{% endblock %}
+
